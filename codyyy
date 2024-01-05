@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Banking System</title>
+    <script>
+        // Initialize accounts array to simulate file-based storage
+        var accounts = [];
+
+        // Function to check if an account exists
+        function checkAccountExists(acno) {
+            for (var i = 0; i < accounts.length; i++) {
+                if (accounts[i].acno === acno) {
+                    return i;  // return the index of the account
+                }
+            }
+            return -1;  // return -1 if the account doesn't exist
+        }
+
+        // Function to create a new account
+        function createAccount() {
+            var acno = document.getElementById('acno').value;
+            var fname = document.getElementById('fname').value;
+            var lname = document.getElementById('lname').value;
+            var balance = parseFloat(document.getElementById('balance').value);
+
+            // Check if account already exists
+            if (checkAccountExists(acno) !== -1) {
+                alert("Account already exists.");
+                return;
+            }
+
+            // Add account to the accounts array
+            accounts.push({ acno: acno, fname: fname, lname: lname, balance: balance });
+            alert("Account created successfully.");
+        }
+
+        // Function to display an account
+        function displayAccount() {
+            var acno = document.getElementById('displayAcno').value;
+            var index = checkAccountExists(acno);
+            if (index === -1) {
+                alert("Account does not exist.");
+                return;
+            }
+
+            // Display account details
+            var account = accounts[index];
+            alert("Account Number: " + account.acno + "\nName: " + account.fname + " " + account.lname + "\nBalance: $" + account.balance);
+        }
+
+        // Add more functions as necessary...
+    </script>
+</head>
+<body>
+    <h1>Simple Banking System</h1>
+
+    <h2>Create Account</h2>
+    Account Number: <input type="text" id="acno"><br>
+    First Name: <input type="text" id="fname"><br>
+    Last Name: <input type="text" id="lname"><br>
+    Initial Balance: <input type="text" id="balance"><br>
+    <button onclick="createAccount()">Create Account</button>
+
+    <h2>Display Account</h2>
+    Account Number: <input type="text" id="displayAcno"><br>
+    <button onclick="displayAccount()">Display Account</button>
+
+    <!-- Add more sections for other functionalities like Deposit, Withdraw, etc. -->
+
+</body>
+</html>
